@@ -1,2 +1,6 @@
+from draw_engine.workspace_state import WorkSpaceState
+
 if __name__ == '__main__':
-    pass
+    wss = WorkSpaceState()
+    wss.run()
+
