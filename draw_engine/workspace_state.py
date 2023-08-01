@@ -30,7 +30,11 @@ class WorkSpaceState:
                 self.running = False
                 pg.quit()
             elif event.type == pg.MOUSEBUTTONDOWN:
-                self.drawing_engine.mouse_handler(pg.mouse.get_pos())
+                self.drawing_engine.mouse_press()
+            elif event.type == pg.MOUSEBUTTONUP:
+                self.drawing_engine.mouse_release()
+            elif event.type == pg.MOUSEMOTION:
+                self.drawing_engine.mouse_motion()
 
     def run(self):
         while self.running:

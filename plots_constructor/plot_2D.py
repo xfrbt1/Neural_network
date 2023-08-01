@@ -7,7 +7,7 @@ class Plot_2D:
         self.figure = plt.figure()
         self.ax = plt.axes()
 
-    def plot(self, x, y, color='BLUE'):
+    def plot(self, x, y, color='blue'):
         self.ax.plot(x, y, color=color)
 
     def set_labels(self, xl, yl):
@@ -16,7 +16,7 @@ class Plot_2D:
     def grid(self):
         plt.grid()
 
-    def scatter_plot(self, x, y, color='BLUE'):
+    def scatter_plot(self, x, y, color='blue'):
         plt.scatter(x, y, color=color)
 
     @staticmethod
