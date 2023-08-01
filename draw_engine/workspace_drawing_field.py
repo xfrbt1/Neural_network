@@ -15,7 +15,9 @@ class DrawingEngine:
 
     def draw(self):
         colors = [(255, 255, 255), (0, 0, 0)]
-        [pg.draw.rect(self.state.screen, color=colors[self.field_data[i][j]], rect=(j * PXAMOUNT, PXAMOUNT * i, PXAMOUNT - 1, PXAMOUNT - 1))
+        [pg.draw.rect(self.state.screen,
+                      color=colors[self.field_data[i][j]],
+                      rect=(j * PXAMOUNT, PXAMOUNT * i, PXAMOUNT - 1, PXAMOUNT - 1))
          for i in range(DFSIZE)
          for j in range(DFSIZE)]
 
@@ -32,7 +34,5 @@ class DrawingEngine:
     def update(self):
         self.key_handler()
 
-    def __str__(self):
-        return f"{self.field_data}"
 
 

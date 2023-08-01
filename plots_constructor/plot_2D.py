@@ -13,6 +13,12 @@ class Plot_2D:
     def set_labels(self, xl, yl):
         pass
 
+    def grid(self):
+        plt.grid()
+
+    def scatter_plot(self, x, y, color='BLUE'):
+        plt.scatter(x, y, color=color)
+
     @staticmethod
     def show():
         plt.show()
