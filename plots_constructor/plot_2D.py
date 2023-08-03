@@ -7,16 +7,18 @@ class Plot_2D:
         self.figure = plt.figure()
         self.ax = plt.axes()
 
-    def plot(self, x, y, color='blue'):
+    def load_data(self, x, y, color='red'):
         self.ax.plot(x, y, color=color)
 
     def set_labels(self, xl, yl):
         pass
 
-    def grid(self):
+    @staticmethod
+    def grid_view():
         plt.grid()
 
-    def scatter_plot(self, x, y, color='blue'):
+    @staticmethod
+    def load_data_scatter(x, y, color='blue'):
         plt.scatter(x, y, color=color)
 
     @staticmethod
