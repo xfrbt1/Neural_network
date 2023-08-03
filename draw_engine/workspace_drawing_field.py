@@ -1,14 +1,18 @@
-import pygame as pg
+import time
 
+import pygame as pg
+from PIL import Image
 from draw_engine.config import *
 
 
 class DrawingEngine:
     def __init__(self, WSState):
         self.state = WSState
+
         self.pressed = False
         self.positions = []
 
+        self.picture_counter = 0
         self.field_data = self.clear_matrix()
 
     @staticmethod
@@ -38,11 +42,31 @@ class DrawingEngine:
         keys = pg.key.get_pressed()
         if keys[pg.K_SPACE]:
             self.field_data = self.clear_matrix()
+        if keys[pg.K_0]:
+            img = self.create_picture()
+            self.save_picture(img)
+            time.sleep(1)
 
     def update_px(self):
         for x, y in self.positions:
             if x < PXAMOUNT * DFSIZE and y < PXAMOUNT * DFSIZE:
                 self.field_data[y // PXAMOUNT][x // PXAMOUNT] = 1
+
+    def create_picture(self):
+        img = Image.new('L', (len(self.field_data), len(self.field_data)))
+        for x in range(len(self.field_data)):
+            for y in range(len(self.field_data)):
+                if self.field_data[x][y] == 1:
+                    pxv = 0
+                else:
+                    pxv = 255
+                img.putpixel((y, x), pxv)
+
+        return img
+
+    def save_picture(self, img):
+        img.save(f"/Users/aleksej/Desktop/python/Neural_network/pictures/pic{self.picture_counter}.png", "PNG")
+        self.picture_counter += 1
 
     def update(self):
         self.key_handler()

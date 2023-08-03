@@ -3,9 +3,8 @@ import numpy as np
 
 
 class LinearRegression:
-    """
-    class that implements calculations with an independent vector and a predictable variable
-    """
+
+    """class that implements calculations with an independent vector and a predictable variable"""
     def __init__(self, x=None, y=None):
         self.x_set = x
         self.y_set = y
@@ -56,6 +55,14 @@ class LinearRegression:
         k, b = self.regression_coefficients_avg()
         return [k * x + b for x in self.x_set]
 
+    @property
+    def get_x_set(self):
+        return self.x_set
+
+    @property
+    def get_y_set(self):
+        return self.y_set
+
     # UPDATE METHODS
     def gen_data(self, n=100):
         k = random.randint(0, n//10)
@@ -69,14 +76,6 @@ class LinearRegression:
 
     def list_tr(self):
         self.data_list = [(self.x_set[i], self.y_set[i]) for i in range(len(self.x_set))]
-
-    @property
-    def get_x_set(self):
-        return self.x_set
-
-    @property
-    def get_y_set(self):
-        return self.y_set
 
     def new_x_set(self, new):
         self.x_set = new
