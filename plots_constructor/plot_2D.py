@@ -1,10 +1,10 @@
-from plots_constructor.abstract_constructor import AbstractPlotConstructor
 from abc import ABC
 import matplotlib.pyplot as plt
 
+from plots_constructor.abstract_constructor import AbstractPlotConstructor
+
 
 class Plot2D(AbstractPlotConstructor, ABC):
-
     @staticmethod
     def set_data(x, y, color='red'):
         plt.plot(x, y, color=color)

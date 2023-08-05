@@ -1,17 +1,24 @@
-import matplotlib
+from abc import ABC
 import matplotlib.pyplot as plt
 
+from plots_constructor.abstract_constructor import AbstractPlotConstructor
 
-class Plot_3D:
+
+class Plot3D(AbstractPlotConstructor, ABC):
     def __init__(self):
-        self.figure = plt.figure()
-        self.ax = plt.axes(projection='3d')
+        plt.axes(projection='3d')
 
-    def plot(self, x, y, z):
-        self.ax.plot3D(x, y, z, color='RED')
+    @staticmethod
+    def set_data(x, y, z, color='red'):
+        plt.plot(x, y, z, color=color)
 
-    def plot_surface(self, x, y, z):
-        self.ax.plot_surface(x, y, z)
+    @staticmethod
+    def set_scatter_data(x, y, z,  color='red'):
+        plt.scatter(x, y, z, color=color)
+
+    @staticmethod
+    def grid_view():
+        plt.grid()
 
     @staticmethod
     def show():

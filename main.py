@@ -1,5 +1,6 @@
 from draw_engine.workspace_state import WorkSpaceState
 from plots_constructor.plot_2D import Plot2D
+from plots_constructor.plot_3D import Plot3D
 from regression_analysis.linear_regression import LinearRegression
 
 if __name__ == '__main__':
@@ -17,5 +18,9 @@ if __name__ == '__main__':
     gr.grid_view()
 
     gr.show()
+
+    gr3d = Plot3D()
+    gr3d.set_scatter_data([1, 2], [2, 4], [4, 8])
+    gr3d.show()
 
 

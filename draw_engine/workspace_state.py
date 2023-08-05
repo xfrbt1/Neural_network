@@ -14,7 +14,7 @@ class WorkSpaceState:
 
     def update(self):
         pg.display.flip()
-        pg.display.set_caption('WORKSPACE')
+        pg.display.set_caption(CAPTION)
 
         self.clock.tick(FPS)
         self.drawing_engine.update()

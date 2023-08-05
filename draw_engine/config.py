@@ -1,11 +1,14 @@
-FPS = 30
+FPS = 120
+CAPTION = 'DrawSpace'
 
-DFSIZE = 64
-PXAMOUNT = 10
+PX_AMOUNT = 16
+PX_SIZE = 20
 
-HEIGHT = DFSIZE * PXAMOUNT
+HEIGHT = PX_AMOUNT * PX_SIZE
 WIDTH = HEIGHT + HEIGHT // 5
 
 
 GRAY = (200, 200, 200)
 WHITE = (255, 255, 255)
+
+DOWNLOAD_PATH = '/Users/aleksej/Desktop/python/Neural_network/pictures'
