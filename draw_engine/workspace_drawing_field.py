@@ -1,5 +1,6 @@
 import datetime
 import time
+import numpy as np
 import pygame as pg
 from PIL import Image
 
@@ -80,6 +81,9 @@ class DrawingEngine:
     def update(self):
         self.key_handler()
         self.update_px()
+
+    def to_vector(self):
+        return np.array(self.field_data).reshape((PX_AMOUNT*PX_AMOUNT), )
 
     def print_field(self):
         [print(*row, sep='  ') for row in self.field_data]

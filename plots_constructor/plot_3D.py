@@ -17,6 +17,11 @@ class Plot3D(AbstractPlotConstructor, ABC):
         plt.scatter(x, y, z, color=color)
 
     @staticmethod
+    def set_vector(x, y, z, color='red'):
+        plt.quiver(0, 0, 0, x, y, z, color=color)
+
+
+    @staticmethod
     def grid_view():
         plt.grid()
 

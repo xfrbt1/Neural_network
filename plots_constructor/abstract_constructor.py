@@ -12,6 +12,10 @@ class AbstractPlotConstructor(ABC):
         pass
 
     @abstractstaticmethod
+    def set_vector(*data):
+        pass
+
+    @abstractstaticmethod
     def grid_view():
         pass
 
