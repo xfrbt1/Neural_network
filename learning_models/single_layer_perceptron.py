@@ -20,6 +20,9 @@ class Perceptron:
     def set_example_y_vector(self, y):
         self.y_e_vector = np.array(y)
 
+    def set_weights(self, weights_vector):
+        self.weights = np.array(weights_vector)
+
     def append_example_y_vector(self, yv):
         self.y_e_vector = np.append(yv)
 
@@ -33,16 +36,19 @@ class Perceptron:
         self.weights = np.array([0.0 for _ in self.x_e_matrix[0]])
 
         for i, row in enumerate(self.x_e_matrix):
+
             value = np.dot(self.weights, row)
 
             if value <= 0 and self.y_e_vector[i] > 0:
                 self.weights += row
-
             elif value >= 0 and self.y_e_vector[i] <= 0:
                 self.weights -= row
 
     def calculate_y(self, x):
         return np.dot(self.weights, np.array(x))
+
+    def activate(self, x):
+        return 1 if np.dot(self.weights, np.array(x)) > 0 else 0
 
     @property
     def get_weights(self):

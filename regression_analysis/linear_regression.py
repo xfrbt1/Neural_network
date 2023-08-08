@@ -3,7 +3,6 @@ import numpy as np
 
 
 class LinearRegression:
-
     """class that implements calculations with an independent vector and a predictable variable"""
     def __init__(self, x=None, y=None):
         self.x_set = x
