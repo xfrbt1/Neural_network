@@ -35,4 +35,8 @@ class ActivationFunction:
     def relu_activation(self):
         self.y = np.array([x if x >= 0 else 0 for x in self.x])
 
+    def for_fun(self):
+        self.y = np.array([math.cos(math.sin(x)) for x in self.x])
+
+
 
