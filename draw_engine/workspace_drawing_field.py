@@ -18,7 +18,7 @@ class DrawingEngine:
         self.field_data = self.clear_matrix()
 
     def draw(self):
-        colors = [(255, 255, 255), (0, 0, 0)]
+        colors = [(0, 0, 0), (255, 255, 255)]
         [pg.draw.rect(self.state.screen,
                       color=colors[self.field_data[i][j]],
                       rect=(j * PX_SIZE, i * PX_SIZE, PX_SIZE - 1, PX_SIZE - 1))
@@ -66,9 +66,9 @@ class DrawingEngine:
         for i in range(len(self.field_data)):
             for j in range(len(self.field_data)):
                 if self.field_data[i][j] == 1:
-                    img.putpixel((j, i), 0)
-                else:
                     img.putpixel((j, i), 255)
+                else:
+                    img.putpixel((j, i), 0)
 
         return img
 
