@@ -49,17 +49,35 @@ class DrawingEngine:
 
     def key_handler(self):
         keys = pg.key.get_pressed()
+        nums = {
+            pg.K_1: 1,
+            pg.K_2: 2,
+            pg.K_3: 3,
+            pg.K_4: 4,
+            pg.K_5: 5,
+            pg.K_6: 6,
+            pg.K_7: 7,
+            pg.K_8: 8,
+            pg.K_9: 9,
+            pg.K_0: 0
+        }
 
         if keys[pg.K_SPACE]:
             self.field_data = self.clear_matrix()
 
-        if keys[pg.K_1]:
+        if keys[pg.K_MINUS]:
             self.print_field()
             time.sleep(0.5)
 
         if keys[pg.K_EQUALS]:
             self.save_picture(path=DOWNLOAD_PATH, img=self.create_picture())
             time.sleep(1)
+
+        for key, value in nums.items():
+            if keys[key]:
+
+                self.print_field()
+                time.sleep(0.5)
 
     def create_picture(self):
         img = Image.new('L', (len(self.field_data), len(self.field_data)))
