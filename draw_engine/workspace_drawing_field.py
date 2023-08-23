@@ -9,6 +9,7 @@ from draw_engine.config import *
 
 class DrawingEngine:
     def __init__(self, WSState):
+
         self.state = WSState
 
         self.pressed = False
@@ -75,8 +76,11 @@ class DrawingEngine:
 
         for key, value in nums.items():
             if keys[key]:
-
-                self.print_field()
+                print(value)
+                print(self.to_matrix())
+                y_vector = np.zeros(10, dtype='int8')
+                y_vector[value] = 1
+                print(y_vector)
                 time.sleep(0.5)
 
     def create_picture(self):
@@ -102,6 +106,9 @@ class DrawingEngine:
 
     def to_vector(self):
         return np.array(self.field_data).reshape((PX_AMOUNT*PX_AMOUNT), )
+
+    def to_matrix(self):
+        return np.array(self.field_data)
 
     def print_field(self):
         [print(*row, sep='  ') for row in self.field_data]
