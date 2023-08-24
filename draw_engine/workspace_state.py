@@ -1,16 +1,20 @@
 import pygame as pg
 from draw_engine.config import *
 from draw_engine.workspace_drawing_field import DrawingEngine
+from dataset.data_handler import DataHandler
 
 
 class WorkSpaceState:
     def __init__(self):
         pg.init()
+
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
         self.clock = pg.time.Clock()
 
         self.running = True
+
         self.drawing_engine = DrawingEngine(self)
+        self.data_handler = DataHandler()
 
     def update(self):
         pg.display.flip()
@@ -41,3 +45,17 @@ class WorkSpaceState:
             self.update()
             self.draw()
             self.check_events()
+
+        self.drawing_engine.print_current_data_set()
+
+        self.data_handler.append_x_data(self.drawing_engine.get_cur_x)
+        self.data_handler.append_y_data(self.drawing_engine.get_cur_y)
+
+        self.data_handler.save_x()
+        self.data_handler.save_y()
+
+
+
+
+
+

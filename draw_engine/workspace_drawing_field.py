@@ -9,14 +9,15 @@ from draw_engine.config import *
 
 class DrawingEngine:
     def __init__(self, WSState):
-
         self.state = WSState
 
         self.pressed = False
         self.positions = []
 
-        self.brush_thickness = 1
         self.field_data = self.clear_matrix()
+
+        self.x_current_data_set = []
+        self.y_current_data_set = []
 
     def draw(self):
         colors = [(0, 0, 0), (255, 255, 255)]
@@ -32,9 +33,6 @@ class DrawingEngine:
                 i = y // PX_SIZE
                 j = x // PX_SIZE
                 self.field_data[i][j] = 1
-
-    def set_new_brush_thickness(self, value):
-        self.brush_thickness += value
 
     def mouse_press(self):
         self.pressed = True
@@ -76,29 +74,12 @@ class DrawingEngine:
 
         for key, value in nums.items():
             if keys[key]:
-                print(value)
-                print(self.to_matrix())
+
                 y_vector = np.zeros(10, dtype='int8')
                 y_vector[value] = 1
-                print(y_vector)
+                self.append_current_data_set(self.to_vector(), self.x_current_data_set)
+                self.append_current_data_set(y_vector, self.y_current_data_set)
                 time.sleep(0.5)
-
-    def create_picture(self):
-        img = Image.new('L', (len(self.field_data), len(self.field_data)))
-        for i in range(len(self.field_data)):
-            for j in range(len(self.field_data)):
-                if self.field_data[i][j] == 1:
-                    img.putpixel((j, i), 255)
-                else:
-                    img.putpixel((j, i), 0)
-
-        return img
-
-    def interpolate(self):
-        pass
-
-    def extrapolate(self):
-        pass
 
     def update(self):
         self.key_handler()
@@ -110,8 +91,30 @@ class DrawingEngine:
     def to_matrix(self):
         return np.array(self.field_data)
 
+    def print_current_data_set(self):
+        for i in range(len(self.x_current_data_set)):
+            print(self.x_current_data_set[i], self.y_current_data_set[i], sep=':', end='\n\n')
+
+    def create_picture(self):
+        img = Image.new('L', (len(self.field_data), len(self.field_data)))
+        for i in range(len(self.field_data)):
+            for j in range(len(self.field_data)):
+                if self.field_data[i][j] == 1:
+                    img.putpixel((j, i), 255)
+                else:
+                    img.putpixel((j, i), 0)
+        return img
+
     def print_field(self):
         [print(*row, sep='  ') for row in self.field_data]
+
+    @property
+    def get_cur_x(self):
+        return np.array(self.x_current_data_set)
+
+    @property
+    def get_cur_y(self):
+        return np.array(self.y_current_data_set)
 
     @staticmethod
     def save_picture(path, img):
@@ -120,6 +123,16 @@ class DrawingEngine:
     @staticmethod
     def clear_matrix():
         return [[0 for _ in range(PX_AMOUNT)] for _ in range(PX_AMOUNT)]
+
+    @staticmethod
+    def append_current_data_set(vector, dataset):
+        dataset.append(vector)
+
+
+
+
+
+
 
 
 
