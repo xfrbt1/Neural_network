@@ -62,14 +62,18 @@ class DataHandler:
         self.y_set = np.array(y_correct)
 
     def print_data(self):
-        self.load_x_data()
-        self.load_y_data()
-
         for i in range(len(self.x_set)):
             print(i, self.x_set[i], self.y_set[i], sep='\n')
             print('_______________________________')
 
-    def img_print(self):
+    def print_data_matrix(self):
+        for i in range(len(self.x_set)):
+            print(self.x_set[i].reshape(PX_AMOUNT, PX_AMOUNT))
+            print()
+            print(self.y_set[i])
+            print('_______________________________')
+
+    def img_(self):
         fig, axs = plt.subplots(1, 10)
         for i, vector in enumerate(self.x_set[len(self.x_set) - 10:len(self.x_set)]):
             matrix = vector.reshape(PX_AMOUNT, PX_AMOUNT)
@@ -112,6 +116,13 @@ class DataHandler:
 
     def len_dataset(self):
         return len(self.x_set), len(self.y_set)
+
+    def print_nums_counter(self):
+        for k, v in self.nums_counter().items():
+            print(k, ':', v)
+
+    def print_len(self):
+        print(self.len_dataset())
 
     @staticmethod
     def save_x_data(x_set):
