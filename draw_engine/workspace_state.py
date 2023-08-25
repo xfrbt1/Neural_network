@@ -32,6 +32,7 @@ class WorkSpaceState:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 self.running = False
+                self.end()
                 pg.quit()
             elif event.type == pg.MOUSEBUTTONDOWN:
                 self.drawing_engine.mouse_press()
@@ -40,19 +41,21 @@ class WorkSpaceState:
             elif event.type == pg.MOUSEMOTION:
                 self.drawing_engine.mouse_motion()
 
+    def end(self):
+        if len(self.drawing_engine.get_cur_x):
+            self.data_handler.append_x_data(self.drawing_engine.get_cur_x)
+            self.data_handler.append_y_data(self.drawing_engine.get_cur_y)
+
+            self.data_handler.save_x()
+            self.data_handler.save_y()
+
     def run(self):
         while self.running:
             self.update()
             self.draw()
             self.check_events()
 
-        self.drawing_engine.print_current_data_set()
 
-        self.data_handler.append_x_data(self.drawing_engine.get_cur_x)
-        self.data_handler.append_y_data(self.drawing_engine.get_cur_y)
-
-        self.data_handler.save_x()
-        self.data_handler.save_y()
 
 
 
