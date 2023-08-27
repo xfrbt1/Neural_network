@@ -62,6 +62,7 @@ class DrawingEngine:
         }
 
         if keys[pg.K_SPACE]:
+            self.state.new_txt('')
             self.field_data = self.clear_matrix()
 
         if keys[pg.K_MINUS]:
@@ -70,13 +71,12 @@ class DrawingEngine:
 
         if keys[pg.K_EQUALS]:
             self.save_picture(path=DOWNLOAD_PATH, img=self.create_picture())
-            time.sleep(1)
+            time.sleep(0.5)
 
-        if keys[pg.K_p]:
+        if keys[pg.K_UP]:
             time.sleep(0.5)
             prd_vector = self.state.nn.predict(np.array([self.to_vector()]))[0]
-            print('MODEL RECOGNIZED: ', np.argmax(prd_vector))
-            print('________________________')
+            self.state.new_txt(str(np.argmax(prd_vector)))
 
         for key, value in nums.items():
             if keys[key]:

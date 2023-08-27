@@ -11,8 +11,11 @@ class WorkSpaceState:
 
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
         self.clock = pg.time.Clock()
+        self.font = pg.font.Font(None, TXT_SIZE)
+        self.font2 = pg.font.Font(None, TXT_SIZE2)
 
         self.running = True
+        self.txt = ''
         self.on_start()
 
     def on_start(self):
@@ -30,8 +33,10 @@ class WorkSpaceState:
 
     def draw(self):
         self.screen.fill(GRAY)
-
         self.drawing_engine.draw()
+
+    def new_txt(self, string):
+        self.txt = string
 
     def check_events(self):
         for event in pg.event.get():
@@ -46,6 +51,19 @@ class WorkSpaceState:
             elif event.type == pg.MOUSEMOTION:
                 self.drawing_engine.mouse_motion()
 
+    def txt_blit(self):
+        static = self.font.render(f'MODEL RECOGNIZED:', True, BLACK)
+        dynamic = self.font2.render(self.txt, True, BLACK)
+        self.screen.blit(static, (HEIGHT, 2))
+        self.screen.blit(dynamic, (HEIGHT, 20))
+
+    def run(self):
+        while self.running:
+            self.update()
+            self.draw()
+            self.check_events()
+            self.txt_blit()
+
     def end(self):
         if len(self.drawing_engine.get_cur_x):
             self.data_handler.append_x_data(self.drawing_engine.get_cur_x)
@@ -53,12 +71,6 @@ class WorkSpaceState:
 
             self.data_handler.save_x()
             self.data_handler.save_y()
-
-    def run(self):
-        while self.running:
-            self.update()
-            self.draw()
-            self.check_events()
 
 
 
