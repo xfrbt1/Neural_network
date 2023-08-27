@@ -5,10 +5,11 @@ PX_AMOUNT = 16
 PX_SIZE = 30
 
 HEIGHT = PX_AMOUNT * PX_SIZE
-WIDTH = HEIGHT + HEIGHT // 5
+WIDTH = HEIGHT
 
 
 GRAY = (200, 200, 200)
 WHITE = (255, 255, 255)
 
 DOWNLOAD_PATH = '/Users/aleksej/Desktop/python/Neural_network/pictures'
+MODEL_NAME = 'mark1'

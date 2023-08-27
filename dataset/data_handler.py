@@ -1,3 +1,5 @@
+import random
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -19,6 +21,23 @@ class DataHandler:
         self.load_x_data()
         self.load_y_data()
 
+    @property
+    def get_x_set(self):
+        return self.x_set
+
+    @property
+    def get_y_set(self):
+        return self.y_set
+
+    def get_x_index(self, index):
+        return self.x_set[index]
+
+    def get_y_index(self, index):
+        return self.y_set[index]
+
+    def vector_num(self, y_vector):
+        return np.where(y_vector == 1)
+
     def save_x(self):
         np.save('dataset/xdataset.npy', self.x_set)
 
@@ -32,6 +51,23 @@ class DataHandler:
     def append_y_data(self, new_y):
         self.load_y_data()
         self.y_set = np.concatenate((self.y_set, new_y))
+
+    def shuffle_sets(self):
+        indexes = [i for i in range(len(self.x_set))]
+        random.shuffle(indexes)
+
+        x_sh = []
+        y_sh = []
+
+        for i in indexes:
+            x_sh.append(self.x_set[i])
+            y_sh.append(self.y_set[i])
+
+        self.x_set = np.array(x_sh)
+        self.y_set = np.array(y_sh)
+
+    def get_random_index(self):
+        return random.randint(0, len(self.x_set)-1)
 
     def find_empty(self):
         x_correct = []
@@ -60,18 +96,6 @@ class DataHandler:
 
         self.x_set = np.array(x_correct)
         self.y_set = np.array(y_correct)
-
-    def print_data(self):
-        for i in range(len(self.x_set)):
-            print(i, self.x_set[i], self.y_set[i], sep='\n')
-            print('_______________________________')
-
-    def print_data_matrix(self):
-        for i in range(len(self.x_set)):
-            print(self.x_set[i].reshape(PX_AMOUNT, PX_AMOUNT))
-            print()
-            print(self.y_set[i])
-            print('_______________________________')
 
     def img_(self):
         fig, axs = plt.subplots(1, 10)
@@ -117,13 +141,6 @@ class DataHandler:
     def len_dataset(self):
         return len(self.x_set), len(self.y_set)
 
-    def print_nums_counter(self):
-        for k, v in self.nums_counter().items():
-            print(k, ':', v)
-
-    def print_len(self):
-        print(self.len_dataset())
-
     @staticmethod
     def save_x_data(x_set):
         np.save('dataset/xdataset.npy', x_set)
@@ -132,6 +149,27 @@ class DataHandler:
     def save_y_data(y_set):
         np.save('dataset/ydataset.npy', y_set)
 
+    def print_data(self):
+        for i in range(len(self.x_set)):
+            print(i, self.x_set[i], self.y_set[i], sep='\n')
+            print('_______________________________')
 
+    def print_data_matrix(self):
+        for i in range(len(self.x_set)):
+            print(self.x_set[i].reshape(PX_AMOUNT, PX_AMOUNT))
+            print()
+            print(self.y_set[i])
+            print('_______________________________')
 
+    def print_data_matrix_index(self, index):
+        print(self.x_set[index].reshape(PX_AMOUNT, PX_AMOUNT))
+        print()
+        print(self.y_set[index])
+        print('_______________________________')
 
+    def print_nums_counter(self):
+        for k, v in self.nums_counter().items():
+            print(k, ':', v)
+
+    def print_len(self):
+        print(self.len_dataset())

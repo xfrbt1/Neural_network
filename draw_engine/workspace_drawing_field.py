@@ -72,6 +72,12 @@ class DrawingEngine:
             self.save_picture(path=DOWNLOAD_PATH, img=self.create_picture())
             time.sleep(1)
 
+        if keys[pg.K_p]:
+            time.sleep(0.5)
+            prd_vector = self.state.nn.predict(np.array([self.to_vector()]))[0]
+            print('MODEL RECOGNIZED: ', np.argmax(prd_vector))
+            print('________________________')
+
         for key, value in nums.items():
             if keys[key]:
 

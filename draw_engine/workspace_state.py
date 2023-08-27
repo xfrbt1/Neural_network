@@ -2,6 +2,7 @@ import pygame as pg
 from draw_engine.config import *
 from draw_engine.workspace_drawing_field import DrawingEngine
 from dataset.data_handler import DataHandler
+from learning_models.keras_model import NeuralNetwork
 
 
 class WorkSpaceState:
@@ -12,9 +13,13 @@ class WorkSpaceState:
         self.clock = pg.time.Clock()
 
         self.running = True
+        self.on_start()
 
+    def on_start(self):
         self.drawing_engine = DrawingEngine(self)
         self.data_handler = DataHandler()
+        self.nn = NeuralNetwork()
+        self.nn.load_model(MODEL_NAME)
 
     def update(self):
         pg.display.flip()
