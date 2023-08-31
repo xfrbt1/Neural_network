@@ -11,15 +11,21 @@ class DataHandler:
         self.x_set = None
         self.y_set = None
 
-    def load_x_data(self):
-        self.x_set = np.load('dataset/xdataset.npy')
+    def new_x(self, x_set):
+        self.x_set = x_set
 
-    def load_y_data(self):
-        self.y_set = np.load('dataset/ydataset.npy')
+    def new_y(self, y_set):
+        self.y_set = y_set
 
-    def load_sets(self):
-        self.load_x_data()
-        self.load_y_data()
+    def load_x_data(self, filename):
+        self.x_set = np.load(f'dataset/{filename}.npy')
+
+    def load_y_data(self, filename):
+        self.y_set = np.load(f'dataset/{filename}.npy')
+
+    def load_sets(self, filename_x, filename_y):
+        self.load_x_data(filename_x)
+        self.load_y_data(filename_y)
 
     @property
     def get_x_set(self):
@@ -38,18 +44,16 @@ class DataHandler:
     def vector_num(self, y_vector):
         return np.where(y_vector == 1)
 
-    def save_x(self):
-        np.save('dataset/xdataset.npy', self.x_set)
+    def save_x(self, filename):
+        np.save(f'dataset/{filename}.npy', self.x_set)
 
-    def save_y(self):
-        np.save('dataset/ydataset.npy', self.y_set)
+    def save_y(self, filename):
+        np.save(f'dataset/{filename}.npy', self.y_set)
 
     def append_x_data(self, new_x):
-        self.load_x_data()
         self.x_set = np.concatenate((self.x_set, new_x))
 
     def append_y_data(self, new_y):
-        self.load_y_data()
         self.y_set = np.concatenate((self.y_set, new_y))
 
     def shuffle_sets(self):
@@ -119,7 +123,7 @@ class DataHandler:
         for i, (key, value) in enumerate(nums.items()):
             matrix = self.x_set[value].reshape(PX_AMOUNT, PX_AMOUNT)
             axs[i].imshow(matrix, cmap='gray')
-            axs[i].set_title(f"|{key}|")
+            axs[i].set_title(f"{key}")
         plt.show()
 
     def nums_counter(self):
@@ -128,7 +132,7 @@ class DataHandler:
             for i in range(len(vector)):
                 if vector[i] == 1:
                     if i not in nums.keys():
-                        nums[i] = 0
+                        nums[i] = 1
                     else:
                         nums[i] += 1
                     break
