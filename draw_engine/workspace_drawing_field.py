@@ -21,11 +21,15 @@ class DrawingEngine:
 
     def draw(self):
         colors = [(0, 0, 0), (255, 255, 255)]
-        [pg.draw.rect(self.state.screen,
-                      color=colors[self.field_data[i][j]],
-                      rect=(j * PX_SIZE, i * PX_SIZE, PX_SIZE - 1, PX_SIZE - 1))
-         for i in range(PX_AMOUNT)
-         for j in range(PX_AMOUNT)]
+        [
+            pg.draw.rect(
+                self.state.screen,
+                color=colors[self.field_data[i][j]],
+                rect=(j * PX_SIZE, i * PX_SIZE, PX_SIZE - 1, PX_SIZE - 1),
+            )
+            for i in range(PX_AMOUNT)
+            for j in range(PX_AMOUNT)
+        ]
 
     def update_px(self):
         for x, y in self.positions:
@@ -58,11 +62,11 @@ class DrawingEngine:
             pg.K_7: 7,
             pg.K_8: 8,
             pg.K_9: 9,
-            pg.K_0: 0
+            pg.K_0: 0,
         }
 
         if keys[pg.K_SPACE]:
-            self.state.new_txt('')
+            self.state.new_txt("")
             self.field_data = self.clear_matrix()
 
         if keys[pg.K_MINUS]:
@@ -81,7 +85,7 @@ class DrawingEngine:
         for key, value in nums.items():
             if keys[key]:
 
-                y_vector = np.zeros(10, dtype='int8')
+                y_vector = np.zeros(10, dtype="int8")
                 y_vector[value] = 1
                 self.append_current_data_set(self.to_vector(), self.x_current_data_set)
                 self.append_current_data_set(y_vector, self.y_current_data_set)
@@ -92,17 +96,24 @@ class DrawingEngine:
         self.update_px()
 
     def to_vector(self):
-        return np.array(self.field_data).reshape((PX_AMOUNT*PX_AMOUNT), )
+        return np.array(self.field_data).reshape(
+            (PX_AMOUNT * PX_AMOUNT),
+        )
 
     def to_matrix(self):
         return np.array(self.field_data)
 
     def print_current_data_set(self):
         for i in range(len(self.x_current_data_set)):
-            print(self.x_current_data_set[i], self.y_current_data_set[i], sep=':', end='\n\n')
+            print(
+                self.x_current_data_set[i],
+                self.y_current_data_set[i],
+                sep=":",
+                end="\n\n",
+            )
 
     def create_picture(self):
-        img = Image.new('L', (len(self.field_data), len(self.field_data)))
+        img = Image.new("L", (len(self.field_data), len(self.field_data)))
         for i in range(len(self.field_data)):
             for j in range(len(self.field_data)):
                 if self.field_data[i][j] == 1:
@@ -112,7 +123,7 @@ class DrawingEngine:
         return img
 
     def print_field(self):
-        [print(*row, sep='  ') for row in self.field_data]
+        [print(*row, sep="  ") for row in self.field_data]
 
     @property
     def get_cur_x(self):
@@ -124,7 +135,9 @@ class DrawingEngine:
 
     @staticmethod
     def save_picture(path, img):
-        img.save(f"{path}/picture{datetime.datetime.now().strftime('%H_%M_%S')}.png", "PNG")
+        img.save(
+            f"{path}/picture{datetime.datetime.now().strftime('%H_%M_%S')}.png", "PNG"
+        )
 
     @staticmethod
     def clear_matrix():
@@ -133,14 +146,3 @@ class DrawingEngine:
     @staticmethod
     def append_current_data_set(vector, dataset):
         dataset.append(vector)
-
-
-
-
-
-
-
-
-
-
-

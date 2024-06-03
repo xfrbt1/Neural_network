@@ -1,5 +1,5 @@
 FPS = 120
-CAPTION = 'DrawSpace'
+CAPTION = "DrawSpace"
 TXT_SIZE_1 = 28
 TXT_SIZE_2 = 256
 
@@ -14,12 +14,15 @@ GRAY = (200, 200, 200)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
-DOWNLOAD_PATH = '/Users/aleksej/Desktop/python/Neural_network/pictures'
+DOWNLOAD_PATH = "/Users/aleksej/Desktop/python/Neural_network/data/pictures"
 
-MODEL_NAME = 'mark1'
+DATASETS_TEST = "/Users/aleksej/Desktop/python/Neural_network/data/test"
+DATASETS_TRAIN = "/Users/aleksej/Desktop/python/Neural_network/data/train"
 
-LEARN_SETX = 'xdataset'
-LEARN_SETY = 'ydataset'
+MODEL_NAME = "mark1"
 
-TEST_SETX = 'xtestdataset'
-TEST_SETY = 'ytestdataset'
+LEARN_SETX = "xdataset"
+LEARN_SETY = "ydataset"
+
+TEST_SETX = "xtestdataset"
+TEST_SETY = "ytestdataset"
