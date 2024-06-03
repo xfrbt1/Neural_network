@@ -1,16 +1,21 @@
 from keras.models import Sequential, load_model
 from keras.layers import Dense, Flatten
 
+
 class NeuralNetwork:
     def __init__(self):
-        self.model = Sequential([
-            Flatten(input_shape=(256,)),
-            Dense(128, activation='relu'),
-            Dense(10, activation='softmax')
-        ])
+        self.model = Sequential(
+            [
+                Flatten(input_shape=(256,)),
+                Dense(128, activation="relu"),
+                Dense(10, activation="softmax"),
+            ]
+        )
 
     def compile(self):
-        self.model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics='accuracy')
+        self.model.compile(
+            loss="categorical_crossentropy", optimizer="sgd", metrics="accuracy"
+        )
 
     def print_log(self):
         self.model.summary()
@@ -26,7 +31,7 @@ class NeuralNetwork:
         return self.model.predict(x_pr)
 
     def save_model(self, model_name):
-        self.model.save(f'learning_models/{model_name}.h5')
+        self.model.save(f"learning_models/{model_name}.h5")
 
     def load_model(self, model_name):
-        self.model = load_model(f'learning_models/{model_name}.h5')
+        self.model = load_model(f"learning_models/{model_name}.h5")

@@ -1,8 +1,9 @@
 import pygame as pg
+
 from draw_engine.config import *
+from draw_engine.data_handler import DataHandler
 from draw_engine.workspace_drawing_field import DrawingEngine
-from dataset.data_handler import DataHandler
-from learning_models.keras_model import NeuralNetwork
+from learning_models.keras_models.keras_model import NeuralNetwork
 
 
 class WorkSpaceState:
@@ -16,7 +17,7 @@ class WorkSpaceState:
         self.font2 = pg.font.Font(None, TXT_SIZE_2)
 
         self.running = True
-        self.txt = ''
+        self.txt = ""
 
         self.drawing_engine = DrawingEngine(self)
         self.data_handler = DataHandler()
@@ -35,8 +36,10 @@ class WorkSpaceState:
         self.drawing_engine.draw()
 
     def txt_blit(self):
-        self.screen.blit(self.font1.render('MODEL RECOGNIZED:', True, BLACK), (HEIGHT, 0))
-        self.screen.blit(self.font2.render(self.txt, True, BLACK), (HEIGHT+70, 20))
+        self.screen.blit(
+            self.font1.render("MODEL RECOGNIZED:", True, BLACK), (HEIGHT, 0)
+        )
+        self.screen.blit(self.font2.render(self.txt, True, BLACK), (HEIGHT + 70, 20))
 
     def new_txt(self, string):
         self.txt = string
@@ -68,11 +71,3 @@ class WorkSpaceState:
 
             self.data_handler.save_x(TEST_SETX)
             self.data_handler.save_y(TEST_SETY)
-
-
-
-
-
-
-
-

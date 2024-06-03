@@ -17,15 +17,11 @@ class DataHandler:
     def new_y(self, y_set):
         self.y_set = y_set
 
-    def load_x_data(self, filename):
-        self.x_set = np.load(f'dataset/{filename}.npy')
+    def load_x_data(self, path: str, filename: str):
+        self.x_set = np.load(f"{path}{filename}.npy")
 
-    def load_y_data(self, filename):
-        self.y_set = np.load(f'dataset/{filename}.npy')
-
-    def load_sets(self, filename_x, filename_y):
-        self.load_x_data(filename_x)
-        self.load_y_data(filename_y)
+    def load_y_data(self, path: str, filename: str):
+        self.y_set = np.load(f"{path}{filename}.npy")
 
     @property
     def get_x_set(self):
@@ -44,11 +40,11 @@ class DataHandler:
     def vector_num(self, y_vector):
         return np.where(y_vector == 1)
 
-    def save_x(self, filename):
-        np.save(f'dataset/{filename}.npy', self.x_set)
+    def save_x(self, path: str, filename: str):
+        np.save(f"{path}{filename}.npy", self.x_set)
 
-    def save_y(self, filename):
-        np.save(f'dataset/{filename}.npy', self.y_set)
+    def save_y(self, path: str, filename: str):
+        np.save(f"{path}{filename}.npy", self.y_set)
 
     def append_x_data(self, new_x):
         self.x_set = np.concatenate((self.x_set, new_x))
@@ -71,7 +67,7 @@ class DataHandler:
         self.y_set = np.array(y_sh)
 
     def get_random_index(self):
-        return random.randint(0, len(self.x_set)-1)
+        return random.randint(0, len(self.x_set) - 1)
 
     def find_empty(self):
         x_correct = []
@@ -103,9 +99,9 @@ class DataHandler:
 
     def img_(self):
         fig, axs = plt.subplots(1, 10)
-        for i, vector in enumerate(self.x_set[len(self.x_set) - 10:len(self.x_set)]):
+        for i, vector in enumerate(self.x_set[len(self.x_set) - 10 : len(self.x_set)]):
             matrix = vector.reshape(PX_AMOUNT, PX_AMOUNT)
-            axs[i].imshow(matrix, cmap='gray')
+            axs[i].imshow(matrix, cmap="gray")
         plt.show()
 
     def img_nums(self):
@@ -122,7 +118,7 @@ class DataHandler:
         fig, axs = plt.subplots(1, len(nums))
         for i, (key, value) in enumerate(nums.items()):
             matrix = self.x_set[value].reshape(PX_AMOUNT, PX_AMOUNT)
-            axs[i].imshow(matrix, cmap='gray')
+            axs[i].imshow(matrix, cmap="gray")
             axs[i].set_title(f"{key}")
         plt.show()
 
@@ -145,35 +141,27 @@ class DataHandler:
     def len_dataset(self):
         return len(self.x_set), len(self.y_set)
 
-    @staticmethod
-    def save_x_data(x_set):
-        np.save('dataset/xdataset.npy', x_set)
-
-    @staticmethod
-    def save_y_data(y_set):
-        np.save('dataset/ydataset.npy', y_set)
-
     def print_data(self):
         for i in range(len(self.x_set)):
-            print(i, self.x_set[i], self.y_set[i], sep='\n')
-            print('_______________________________')
+            print(i, self.x_set[i], self.y_set[i], sep="\n")
+            print("_______________________________")
 
     def print_data_matrix(self):
         for i in range(len(self.x_set)):
             print(self.x_set[i].reshape(PX_AMOUNT, PX_AMOUNT))
             print()
             print(self.y_set[i])
-            print('_______________________________')
+            print("_______________________________")
 
     def print_data_matrix_index(self, index):
         print(self.x_set[index].reshape(PX_AMOUNT, PX_AMOUNT))
         print()
         print(self.y_set[index])
-        print('_______________________________')
+        print("_______________________________")
 
     def print_nums_counter(self):
         for k, v in self.nums_counter().items():
-            print(k, ':', v)
+            print(k, ":", v)
 
     def print_len(self):
         print(self.len_dataset())
